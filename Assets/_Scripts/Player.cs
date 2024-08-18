@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Vector3 playerScale;
 
-    
     public event EventHandler<OnPlayerScaleChangedEventArgs> OnPlayerScaleChanged;
     public class OnPlayerScaleChangedEventArgs : EventArgs
     {
@@ -30,23 +29,22 @@ public class Player : MonoBehaviour
 
     public void UpdateScale(Vector3 scale)
     {
-        
         playerScale = scale;
 
         OnPlayerScaleChanged?.Invoke(this, new OnPlayerScaleChangedEventArgs
         {
             playerScale = scale
         });
-
-
-    }
+    }   
     
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            int i = UnityEngine.Random.Range(0, 10);
-            UpdateScale(new Vector3(i, i, i));
+            int x = UnityEngine.Random.Range(1, 10);
+            int y = UnityEngine.Random.Range(1, 10);
+            int z = UnityEngine.Random.Range(1, 10);
+            UpdateScale(new Vector3(x, y, z));
         }
     }
 

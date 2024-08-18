@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class PlayerVisual : MonoBehaviour
 {
     [SerializeField] private Transform playerVisualTransform;
+    [SerializeField] private float scaleDuration;
 
     private void Awake()
     {
@@ -19,6 +21,6 @@ public class PlayerVisual : MonoBehaviour
 
     private void Instance_OnPlayerScaleChanged(object sender, Player.OnPlayerScaleChangedEventArgs e)
     {
-        playerVisualTransform.localScale = e.playerScale;
+        playerVisualTransform.DOScale(e.playerScale, scaleDuration).SetEase(Ease.InOutBounce);
     }
 }
