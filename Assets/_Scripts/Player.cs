@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -16,8 +17,26 @@ public class Player : MonoBehaviour
 
         Instance = this;
     }
+    
 
-    [SerializeField] private Vector3 playerScale;
+    [SerializeField] private Vector3 _playerScale;
+    public Vector3 PlayerScale
+    {
+        get
+        {
+            return _playerScale;
+        }
+        set
+        {
+            _playerScale = value;
+
+            OnPlayerScaleChanged?.Invoke(this, new OnPlayerScaleChangedEventArgs
+            {
+                playerScale = value
+            });
+
+        }
+    }
 
     public event EventHandler<OnPlayerScaleChangedEventArgs> OnPlayerScaleChanged;
     public class OnPlayerScaleChangedEventArgs : EventArgs
@@ -25,18 +44,23 @@ public class Player : MonoBehaviour
         public Vector3 playerScale;
     }
 
-
-
-    public void UpdateScale(Vector3 scale)
+    private void Start()
     {
-        playerScale = scale;
+        PlayerScale = Vector3.one;
+    }
 
-        OnPlayerScaleChanged?.Invoke(this, new OnPlayerScaleChangedEventArgs
-        {
-            playerScale = scale
-        });
-    }   
-    
+
+
+    //public void UpdateScale(Vector3 scale)
+    //{
+    //    _playerScale = scale;
+
+    //    OnPlayerScaleChanged?.Invoke(this, new OnPlayerScaleChangedEventArgs
+    //    {
+    //        playerScale = scale
+    //    });
+    //}   
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -44,7 +68,8 @@ public class Player : MonoBehaviour
             int x = UnityEngine.Random.Range(1, 10);
             int y = UnityEngine.Random.Range(1, 10);
             int z = UnityEngine.Random.Range(1, 10);
-            UpdateScale(new Vector3(x, y, z));
+
+            PlayerScale += new Vector3(1, 0, 0);
         }
     }
 
