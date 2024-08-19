@@ -10,12 +10,14 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
-            Debug.LogError("more than one player instance bruh");
+            Destroy(this);
         }
-
-        Instance = this;
+        else
+        {
+            Instance = this;
+        }
     }
     
 
@@ -51,16 +53,6 @@ public class Player : MonoBehaviour
 
 
 
-    //public void UpdateScale(Vector3 scale)
-    //{
-    //    _playerScale = scale;
-
-    //    OnPlayerScaleChanged?.Invoke(this, new OnPlayerScaleChangedEventArgs
-    //    {
-    //        playerScale = scale
-    //    });
-    //}   
-
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -69,7 +61,7 @@ public class Player : MonoBehaviour
             int y = UnityEngine.Random.Range(1, 10);
             int z = UnityEngine.Random.Range(1, 10);
 
-            PlayerScale += new Vector3(1, 0, 0);
+            PlayerScale += new Vector3(x,y,z);
         }
     }
 

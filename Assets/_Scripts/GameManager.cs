@@ -7,11 +7,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     private void Awake()
     {
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
-            Debug.LogError("more than one instance bruh");
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
         }
 
-        Instance = this;
     }
 }
