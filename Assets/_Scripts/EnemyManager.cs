@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
     
     private void SearchSpawnVector(){
         Vector3 origin = Player.Instance.transform.position;
-        Vector3 playerScale = Player.Instance.PlayerScale
+        Vector3 playerScale = Player.Instance.PlayerScale;
         origin += new Vector3(0, 1, 0);
     }
 
