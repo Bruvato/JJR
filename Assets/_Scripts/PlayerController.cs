@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +8,18 @@ public class PlayerController : MonoBehaviour
 {
     private const int MOVE_DISTANCE = 1;
 
+    [SerializeField] private float playerMoveDuration;
     [SerializeField] private Transform cameraTransform;
+
+    public static event EventHandler OnPlayerPositionChanged;
 
     public void Update()
     {
+        if (TurnManager.Instance.GetState() != GameState.PlayerTurn)
+        {
+            return;
+        }
+
         Vector3 newPosition = transform.position;
 
         Vector3 forward = cameraTransform.forward;
@@ -83,6 +93,13 @@ public class PlayerController : MonoBehaviour
         newPosition.y = Mathf.Round(newPosition.y);
         newPosition.z = Mathf.Round(newPosition.z);
 
-        transform.position = newPosition;
+        if (transform.position != newPosition)
+        {
+            transform.position = newPosition;
+
+            OnPlayerPositionChanged?.Invoke(this, EventArgs.Empty);
+        }
+        
+        
     }
 }

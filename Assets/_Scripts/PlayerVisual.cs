@@ -16,11 +16,12 @@ public class PlayerVisual : MonoBehaviour
 
     private void Start()
     {
-        Player.Instance.OnPlayerScaleChanged += Instance_OnPlayerScaleChanged;
+        Player.Instance.OnScaleChanged += Instance_OnScaleChanged;
     }
 
-    private void Instance_OnPlayerScaleChanged(object sender, Player.OnPlayerScaleChangedEventArgs e)
+    private void Instance_OnScaleChanged(object sender, IScalable.OnScaleChangedEventArgs e)
     {
-        playerVisualTransform.DOScale(e.playerScale, scaleDuration).SetEase(Ease.InOutBounce);
+        playerVisualTransform.DOScale(e.scale, scaleDuration).SetEase(Ease.InOutBounce);
     }
+
 }

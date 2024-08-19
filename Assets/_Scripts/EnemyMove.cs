@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,24 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    [SerializeField] Transform transform;
+    private Dictionary<Vector3, float> trajectoryMatch = new Dictionary<Vector3, float>();
 
-    Dictionary<Vector3, float> trajectoryMatch = new Dictionary<Vector3, float>();
+    // invoke when any enemy moves
+    public static event EventHandler OnAnyEnemyPositionChanged;
+
+
+    private void Update()
+    {
+        if (TurnManager.Instance.GetState() != GameState.EnemyTurn)
+        {
+            return;
+        }
+
+        //for testing
+        transform.position += Vector3.up;
+
+        OnAnyEnemyPositionChanged.Invoke(this, EventArgs.Empty);
+    }
     private Vector3 findTrajectory(){
         Vector3 toPlayer = Vector3.Normalize(Player.Instance.transform.position - transform.position);
 

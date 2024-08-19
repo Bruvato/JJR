@@ -16,12 +16,14 @@ public class PlayerScaleUI : MonoBehaviour
 
     private void Start()
     {
-        Player.Instance.OnPlayerScaleChanged += Instance_OnPlayerScaleChanged;
+        Player.Instance.OnScaleChanged += Instance_OnScaleChanged;
+
+        UpdateScaleText(Vector3.zero);
     }
 
-    private void Instance_OnPlayerScaleChanged(object sender, Player.OnPlayerScaleChangedEventArgs e)
+    private void Instance_OnScaleChanged(object sender, IScalable.OnScaleChangedEventArgs e)
     {
-        UpdateScaleText(e.playerScale);
+        UpdateScaleText(e.scale);
     }
 
     public void UpdateScaleText(Vector3 scale)

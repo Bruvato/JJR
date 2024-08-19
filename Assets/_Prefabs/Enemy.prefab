@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: addb15f07f4848a4da2466fff8b0cb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyVisual: {fileID: 4623938693521291253}
 --- !u!114 &-6030451395661397581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,5 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14bde0d5b7bc3ce48addd44afbf21b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: -3316655439024889286}
   enemyVisualTransform: {fileID: 5715045676729848097}
   scaleDuration: 0.2

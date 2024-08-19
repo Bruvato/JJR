@@ -17,4 +17,22 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    private void Start()
+    {
+        Player.Instance.OnScaleChanged += Instance_OnScaleChanged; ;
+    }
+
+    private void Instance_OnScaleChanged(object sender, IScalable.OnScaleChangedEventArgs e)
+    {
+        Vector3 playerScale = e.scale;
+        if (playerScale.x * playerScale.y * playerScale.z == 0)
+        {
+            //GAME OVER
+            Debug.Log("GAME OVER");
+        }
+    }
+
+
+
 }

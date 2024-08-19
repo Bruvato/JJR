@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,87 +7,132 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GameState
-    {
-    START, CYCLE, PACTIONS, EACTIONS, END
-    }
+{
+    Start,
+    PlayerTurn,
+    EnemyTurn,
+    Cycle,
+    End
+}
 
 public class TurnManager : MonoBehaviour
 {
-    public static TurnManager Instance{get; private set;}
+    public static TurnManager Instance { get; private set; }
     private void Awake()
     {
 
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
-            Debug.LogError("more than one instance bruh");
+            Destroy(this);
         }
-        Instance = this;
+        else
+        {
+            Instance = this;
+        }
     }
-    public GameState State;
+    private float turnCount;
+
+    private GameState _state;
+    public GameState GetState()
+    {
+        return _state;
+    }
     private GameState nextState;
+
     public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
-    public class OnStateChangedEventArgs : EventArgs{
+    public class OnStateChangedEventArgs : EventArgs
+    {
         public GameState state;
     }
-    public void UpdateGameState(GameState newState){
-        State = newState;
+
+    private void Start()
+    {
+        PlayerController.OnPlayerPositionChanged += TurnManager_OnPlayerPositionChanged;
+        EnemyMove.OnAnyEnemyPositionChanged += EnemyMove_OnEnemyPositionChanged;
+
+
+        UpdateGameState(GameState.PlayerTurn);
+    }
+
+
+    private void TurnManager_OnPlayerPositionChanged(object sender, EventArgs e)
+    {
+        // when player moves change state from playerTurn to enemyTurn
+        // lets just say pressing a movment key regardless of if player shot or not ends the turn
+        if (_state != GameState.PlayerTurn)
+        {
+            return;
+        }
+
+        UpdateGameState(nextState);
+    }
+    private void EnemyMove_OnEnemyPositionChanged(object sender, EventArgs e)
+    {
+        // when enemy moves change state from enemyTurn to Cycle
+        if (_state != GameState.EnemyTurn)
+        {
+            return;
+        }
+
+        UpdateGameState(nextState);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            UpdateGameState(nextState);
+        }
+    }
+    public void UpdateGameState(GameState newState)
+    {
+        _state = newState;
+
         OnStateChanged?.Invoke(this, new OnStateChangedEventArgs
         {
             state = newState
         });
-        Debug.Log(" " + newState);
-        switch (newState){
-            case GameState.START:
+
+        switch (newState)
+        {
+            case GameState.Start:
                 break;
-            case GameState.PACTIONS:
-                HandlePACTIONS();
+            case GameState.PlayerTurn:
+                HandlePlayerActions();
                 break;
-            case GameState.EACTIONS:
-                HandleEACTIONS();
+            case GameState.EnemyTurn:
+                HandleEnemyActions();
                 break;
-            case GameState.CYCLE:
-                HandleCYCLE();
+            case GameState.Cycle:
+                HandleCycle();
                 break;
-            case GameState.END:
+            case GameState.End:
                 break;
         }
-        
+
     }
 
-    private void HandlePACTIONS()
+    private void HandlePlayerActions()
+    {
+        if (turnCount % 5 == 0)
+        {
+            //power up / reward
+        }
+
+        nextState = GameState.EnemyTurn;
+    }
+    private void HandleEnemyActions()
     {
 
-        nextState = GameState.EACTIONS;
+        nextState = GameState.Cycle;
     }
-    private void HandleEACTIONS()
+    private void HandleCycle()
     {
+        turnCount++;
 
-        nextState = GameState.CYCLE;
-    }
-    private void HandleCYCLE()
-    {
         EnemyManager.Instance.Spawn();
 
-        nextState = GameState.PACTIONS;
+        nextState = GameState.PlayerTurn;
     }
 
-
-    
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.A)==true){
-            UpdateGameState(nextState);
-            Debug.Log("A");
-
-        }
-
-    }
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
-    private void Start()
-    {
-        UpdateGameState(GameState.PACTIONS);
-    }
 }

@@ -2,11 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IScalable
 {
     public static Player Instance {  get; private set; }
+
+    public event EventHandler<IScalable.OnScaleChangedEventArgs> OnScaleChanged;
+
+    private Vector3 _playerScale;
+    public Vector3 GetScale()
+    {
+        return _playerScale;
+    }
+    public void SetScale(Vector3 scale)
+    {
+        _playerScale = scale;
+
+        OnScaleChanged?.Invoke(this, new IScalable.OnScaleChangedEventArgs
+        {
+            scale = scale,
+        });
+    }
+
 
     private void Awake()
     {
@@ -21,34 +38,11 @@ public class Player : MonoBehaviour
     }
     
 
-    [SerializeField] private Vector3 _playerScale;
-    public Vector3 PlayerScale
-    {
-        get
-        {
-            return _playerScale;
-        }
-        set
-        {
-            _playerScale = value;
-
-            OnPlayerScaleChanged?.Invoke(this, new OnPlayerScaleChangedEventArgs
-            {
-                playerScale = value
-            });
-
-        }
-    }
-
-    public event EventHandler<OnPlayerScaleChangedEventArgs> OnPlayerScaleChanged;
-    public class OnPlayerScaleChangedEventArgs : EventArgs
-    {
-        public Vector3 playerScale;
-    }
+    
 
     private void Start()
     {
-        PlayerScale = Vector3.one;
+        SetScale(Vector3.one);
     }
 
 
@@ -57,13 +51,16 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            int x = UnityEngine.Random.Range(1, 10);
-            int y = UnityEngine.Random.Range(1, 10);
-            int z = UnityEngine.Random.Range(1, 10);
+            int x = UnityEngine.Random.Range(1, 50);
+            int y = UnityEngine.Random.Range(1, 50);
+            int z = UnityEngine.Random.Range(1, 50);
 
-            PlayerScale = new Vector3(x,y,z);
+            int o = UnityEngine.Random.Range(1, 4);
+            Vector3 newScale = FunctionApplier.ApplyFunctionOnVecComponents(FunctionApplier.Function.Add, GetScale(), 1, o==1, o==2, o==3);
+            
+            SetScale(newScale);
         }
     }
 
-
+    
 }

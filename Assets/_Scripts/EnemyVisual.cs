@@ -5,17 +5,22 @@ using UnityEngine;
 
 public class EnemyVisual : MonoBehaviour
 {
-
+    [SerializeField] private Enemy enemy;
     [SerializeField] private Transform enemyVisualTransform;
-    
     [SerializeField] private float scaleDuration;
 
-
-    public void enemyVisualResize(Vector3 vector)
-    
+    private void Awake()
     {
-    enemyVisualTransform.DOScale(vector, scaleDuration).SetEase(Ease.InOutBounce);
+        enemy.OnScaleChanged += Enemy_OnScaleChanged;
+    }
+    private void Start()
+    {
+        
+    }
 
+    private void Enemy_OnScaleChanged(object sender, IScalable.OnScaleChangedEventArgs e)
+    {
+        enemyVisualTransform.DOScale(e.scale, scaleDuration).SetEase(Ease.InOutBounce);
     }
     
 }
