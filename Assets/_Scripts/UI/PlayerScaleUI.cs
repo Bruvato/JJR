@@ -28,9 +28,9 @@ public class PlayerScaleUI : MonoBehaviour
 
     public void UpdateScaleText(Vector3 scale)
     {
-        xScaleText.text = "X: " + scale.x;
-        yScaleText.text = "Y: " + scale.y;
-        zScaleText.text = "Z: " + scale.z;
+        xScaleText.text = "x: " + scale.x;
+        yScaleText.text = "y: " + scale.y;
+        zScaleText.text = "z: " + scale.z;
 
     }
 }

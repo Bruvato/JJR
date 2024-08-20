@@ -30,7 +30,30 @@ public class TurnManager : MonoBehaviour
             Instance = this;
         }
     }
-    private float turnCount;
+
+
+    private float _turnCount;
+    public float TurnCount
+    {
+        get
+        {
+            return _turnCount;
+        }
+        set
+        {
+            _turnCount = value;
+
+            OnTurnCountChanged?.Invoke(this, new OnTurnCountChangedEventArgs
+            {
+                turnCount = value
+            });
+        }
+    }
+    public event EventHandler<OnTurnCountChangedEventArgs> OnTurnCountChanged;
+    public class OnTurnCountChangedEventArgs : EventArgs
+    {
+        public float turnCount;
+    }
 
     private GameState _state;
     public GameState GetState()
@@ -114,10 +137,7 @@ public class TurnManager : MonoBehaviour
 
     private void HandlePlayerActions()
     {
-        if (turnCount % 5 == 0)
-        {
-            //power up / reward
-        }
+        
 
         nextState = GameState.EnemyTurn;
     }
@@ -133,7 +153,7 @@ public class TurnManager : MonoBehaviour
     }
     private void HandleCycle()
     {
-        turnCount++;
+        TurnCount++;
 
         EnemyManager.Instance.Spawn();
 
