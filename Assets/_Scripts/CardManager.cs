@@ -59,16 +59,30 @@ public class CardManager : MonoBehaviour
     private void Start()
     {
         TurnManager.Instance.OnTurnCountChanged += Instance_OnTurnCountChanged;
+        TurnManager.Instance.OnStateChanged += Instance_OnStateChanged;
 
         SpawnNewCard();
     }
 
-    private void Instance_OnTurnCountChanged(object sender, TurnManager.OnTurnCountChangedEventArgs e)
+    private void Instance_OnStateChanged(object sender, TurnManager.OnStateChangedEventArgs e)
     {
-        if (e.turnCount % 5 == 0)
+        if (TurnManager.Instance.GetState() != GameState.PickCard)
+        {
+            return;
+        }
+
+        if (TurnManager.Instance.TurnCount % 5 == 0)
         {
             SpawnNewCard();
         }
+        
+
+        
+    }
+
+    private void Instance_OnTurnCountChanged(object sender, TurnManager.OnTurnCountChangedEventArgs e)
+    {
+        
     }
 
     private void SpawnNewCard()
@@ -77,9 +91,7 @@ public class CardManager : MonoBehaviour
         {
             Card newCard = new Card(null, null, 0);
 
-            int randomAxis = UnityEngine.Random.Range(1, 4);
-
-            switch (randomAxis)
+            switch (i)
             {
                 case 1:
                     newCard.axis = "x";

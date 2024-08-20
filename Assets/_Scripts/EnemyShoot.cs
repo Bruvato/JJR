@@ -65,7 +65,7 @@ public class EnemyShoot : MonoBehaviour
 
             Physics.IgnoreCollision(bullet.GetComponent<Collider>(), enemyCollider);
 
-            //SoundManager.Instance.Play("EShoot");
+            SoundManager.Instance.Play("EShoot");
         }
 
     }

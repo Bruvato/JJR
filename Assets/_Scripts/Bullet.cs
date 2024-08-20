@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
 
             scalable.SetScale(FunctionApplier.ApplyFunctionOnVecComponents(FunctionApplier.Function.Add, scale, -bulletScaleAmount, true, true, true));
 
-            //SoundManager.Instance.Play("Hurt");
+            SoundManager.Instance.Play("Hurt");
 
             Destroy(gameObject);
         }

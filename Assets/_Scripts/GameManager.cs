@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         if (playerScale.x * playerScale.y * playerScale.z == 0)
         {
             //GAME OVER
-            Debug.Log("GAME OVER");
+            TurnManager.Instance.UpdateGameState(GameState.End);
         }
     }
 

@@ -19,13 +19,13 @@ public static class FunctionApplier
         switch(function)
         {
             case Function.Add:
-                return Mathf.Clamp(input + adjustmentValue, input + adjustmentValue, MAX_SCALE);
+                return Mathf.Clamp(input + adjustmentValue, 0, MAX_SCALE);
 
             case Function.Multiply:
-                return Mathf.Clamp(input * adjustmentValue, input * adjustmentValue, MAX_SCALE);
+                return Mathf.Clamp(input * adjustmentValue, 0, MAX_SCALE);
 
             case Function.Power:
-                return Mathf.Clamp(Mathf.Pow(input, adjustmentValue), Mathf.Pow(input, adjustmentValue), MAX_SCALE);
+                return Mathf.Clamp(Mathf.Pow(input, adjustmentValue), 0, MAX_SCALE);
         }
 
         return input;

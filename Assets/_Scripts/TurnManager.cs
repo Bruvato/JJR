@@ -9,7 +9,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public enum GameState
 {
-    Start,
+    PickCard,
     PlayerTurn,
     EnemyTurn,
     Cycle,
@@ -69,22 +69,56 @@ public class TurnManager : MonoBehaviour
         public GameState state;
     }
 
+    [SerializeField] private float _cycleTimerMax = 3f;
+    private float _cycleTimer;
+    public float CycleTimer
+    {
+        get
+        {
+            return _cycleTimer;
+        }
+        set
+        {
+            _cycleTimer = value;
+
+            OnCycleTimerChanged?.Invoke(this, new OnCycleTimerChangedEventArgs
+            {
+                cycleTimer = value
+            });
+        }
+    }
+
+    public event EventHandler<OnCycleTimerChangedEventArgs> OnCycleTimerChanged;
+    public class OnCycleTimerChangedEventArgs : EventArgs
+    {
+        public float cycleTimer;
+    }
+
+
     private void Start()
     {
         PlayerController.OnPlayerPositionChanged += TurnManager_OnPlayerPositionChanged;
         EnemyMove.OnAnyEnemyPositionChanged += EnemyMove_OnEnemyPositionChanged;
+        CardManager.Instance.OnCardsChanged += Instance_OnCardsChanged;
 
 
-        UpdateGameState(GameState.PlayerTurn);
+        UpdateGameState(GameState.PickCard);
+
         SoundManager.Instance.Play("BGM");
 
     }
 
+    private void Instance_OnCardsChanged(object sender, EventArgs e)
+    {
+        if (CardManager.Instance.GetCards().Count != 0)
+        {
+            return;
+        }
 
+        UpdateGameState(nextState);
+    }
     private void TurnManager_OnPlayerPositionChanged(object sender, EventArgs e)
     {
-        // when player moves change state from playerTurn to enemyTurn
-        // lets just say pressing a movment key regardless of if player shot or not ends the turn
         if (_state != GameState.PlayerTurn)
         {
             return;
@@ -92,6 +126,8 @@ public class TurnManager : MonoBehaviour
 
         UpdateGameState(nextState);
     }
+
+
     private void EnemyMove_OnEnemyPositionChanged(object sender, EventArgs e)
     {
         // when enemy moves change state from enemyTurn to Cycle
@@ -105,13 +141,39 @@ public class TurnManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.F))
+        //if (Input.GetKeyUp(KeyCode.F))
+        //{
+        //    UpdateGameState(nextState);
+        //}
+        switch (_state)
         {
-            UpdateGameState(nextState);
+            case GameState.PickCard:
+                
+                break;
+            case GameState.PlayerTurn:
+                
+                break;
+            case GameState.EnemyTurn:
+                
+                break;
+            case GameState.Cycle:
+                CycleTimer -= Time.deltaTime;
+                if (CycleTimer <= 0)
+                {
+                    UpdateGameState(nextState);
+                }
+                break;
+            case GameState.End:
+
+                break;
         }
+        
+
+        
     }
     public void UpdateGameState(GameState newState)
     {
+        //Debug.Log(newState);
         _state = newState;
 
         OnStateChanged?.Invoke(this, new OnStateChangedEventArgs
@@ -121,7 +183,8 @@ public class TurnManager : MonoBehaviour
 
         switch (newState)
         {
-            case GameState.Start:
+            case GameState.PickCard:
+                HandlePickCard();
                 break;
             case GameState.PlayerTurn:
                 HandlePlayerActions();
@@ -137,30 +200,49 @@ public class TurnManager : MonoBehaviour
         }
 
     }
+    private void HandlePickCard()
+    {
+        nextState = GameState.PlayerTurn;
+
+    }
 
     private void HandlePlayerActions()
     {
-        
-
         nextState = GameState.EnemyTurn;
     }
     private void HandleEnemyActions()
     {
+        nextState = GameState.Cycle;
+
+        if (EnemyManager.Instance.GetEnemies().Count == 0)
+        {
+            UpdateGameState(nextState);
+        }
+
         EnemyManager.Instance.EnemyShoot();
         EnemyManager.Instance.EnemyMove();
 
-        // EnemyManager.Instance.EnemyMove();
-        nextState = GameState.Cycle;
+
     }
     private void HandleCycle()
     {
+        nextState = GameState.PlayerTurn;
+
+        _cycleTimer = _cycleTimerMax;
+
         TurnCount++;
+
+        if (TurnCount % 5 == 0)
+        {
+            nextState = GameState.PickCard;
+        }
 
         EnemyManager.Instance.Spawn();
         EnemyManager.Instance.EnemyAim();
         EnemyManager.Instance.EnemyPreMove();
+
         SoundManager.Instance.Play("Turn");
-        nextState = GameState.PlayerTurn;
+
     }
 
 }
