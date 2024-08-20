@@ -143,8 +143,10 @@ public class TurnManager : MonoBehaviour
     }
     private void HandleEnemyActions()
     {
-        EnemyManager.Instance.EnemyMove();
         EnemyManager.Instance.EnemyShoot();
+        EnemyManager.Instance.EnemyMove();
+
+        // EnemyManager.Instance.EnemyMove();
         nextState = GameState.Cycle;
     }
     private void HandleCycle()
@@ -153,6 +155,7 @@ public class TurnManager : MonoBehaviour
 
         EnemyManager.Instance.Spawn();
         EnemyManager.Instance.EnemyAim();
+        EnemyManager.Instance.EnemyPreMove();
         nextState = GameState.PlayerTurn;
     }
 
