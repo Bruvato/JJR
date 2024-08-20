@@ -33,6 +33,7 @@ public class Bullet : MonoBehaviour
             Vector3 scale = scalable.GetScale();
 
             scalable.SetScale(FunctionApplier.ApplyFunctionOnVecComponents(FunctionApplier.Function.Add, scale, -bulletScaleAmount, true, true, true));
+            SoundManager.Instance.Play("Hurt");
 
             Destroy(gameObject);
         }
