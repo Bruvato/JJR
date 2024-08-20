@@ -57,7 +57,8 @@ public class EnemyMove : MonoBehaviour
         lineRenderer.positionCount = moveDistance;
         lineRenderer.SetPosition(0, prediction);
         while(steps<moveDistance){
-        
+        lineRenderer.SetPosition(steps, prediction);
+
         float distance = Vector3.Magnitude(Player.Instance.transform.position - prediction);
         Vector3 playerScale = Player.Instance.GetScale();
         int playerRange = (int)(Mathf.Max(Mathf.Max(playerScale.x, playerScale.y), playerScale.z) / 2);
@@ -69,8 +70,9 @@ public class EnemyMove : MonoBehaviour
         }else{
             MoveAway();
         }
+
         steps++;
-        lineRenderer.SetPosition(steps, prediction);
+
 
         }
 

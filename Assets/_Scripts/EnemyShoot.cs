@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class EnemyShoot : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     private Quaternion aimDir;
+    [SerializeField] private int Cooldown;
 
     [SerializeField] private Collider enemyCollider;
 
