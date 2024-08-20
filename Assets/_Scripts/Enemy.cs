@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IScalable
 {
-    //[SerializeField] private EnemyVisual enemyVisual;
-    //[SerializeField] private EnemyVisual enemyMove;
-
     public event EventHandler<IScalable.OnScaleChangedEventArgs> OnScaleChanged;
     
     private Vector3 _enemyScale;
@@ -35,7 +32,8 @@ public class Enemy : MonoBehaviour, IScalable
     private void OnDestroy()
     {
         EnemyManager.Instance.GetEnemies().Remove(this);
-        SoundManager.Instance.Play("Kill");
+
+        //SoundManager.Instance.Play("Kill");
 
     }
 

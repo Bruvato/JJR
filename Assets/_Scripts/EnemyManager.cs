@@ -70,8 +70,7 @@ public class EnemyManager : MonoBehaviour
     }
     private Vector3 SearchSpawnVector()
     {
-        Vector3 playerScale = Player.Instance.GetScale();
-        int range = (int)(Mathf.Max(Mathf.Max(playerScale.x, playerScale.y), playerScale.z) / 2 + spawnRadiusModifier);
+        int range = (int)(Player.Instance.GetMaxScaleComponent() / 2 + spawnRadiusModifier);
         Vector3 location = Player.Instance.transform.position + UnityEngine.Random.insideUnitSphere.normalized * range;
 
 

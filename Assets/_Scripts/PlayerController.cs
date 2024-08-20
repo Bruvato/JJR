@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 {
     private const int MOVE_DISTANCE = 1;
 
-    [SerializeField] private float playerMoveDuration;
     [SerializeField] private Transform cameraTransform;
 
     public static event EventHandler OnPlayerPositionChanged;

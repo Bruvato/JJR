@@ -6,7 +6,9 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
+
     [SerializeField] private Sound[] sounds;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -17,6 +19,8 @@ public class SoundManager : MonoBehaviour
         {
             Instance = this;
         }
+
+
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -27,19 +31,13 @@ public class SoundManager : MonoBehaviour
             s.source.loop = s.looping;
         }
     }
-    public void Play(string name){
+
+    public void Play(string name)
+    {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Play();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 }
