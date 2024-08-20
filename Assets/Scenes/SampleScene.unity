@@ -1056,6 +1056,12 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &455692015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6641463155243143313, guid: 37c0bc67edcfb8b448e9132340a30cd1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6599859812494649420}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &492566656
 GameObject:
   m_ObjectHideFlags: 3
@@ -1213,6 +1219,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6599859812494649420}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &523223904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455692015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8947f7361b7f2c46b9e01d16eb57706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4284621713258234524, guid: d074afe4dd0c0c940bb3da7b3c30a9c8,
+    type: 3}
+  firePoint: {fileID: 1142871676}
 --- !u!1 &622795365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2142,10 +2163,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4150928636041873960, guid: 37c0bc67edcfb8b448e9132340a30cd1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6641463155243143313, guid: 37c0bc67edcfb8b448e9132340a30cd1,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6641463155243143313, guid: 37c0bc67edcfb8b448e9132340a30cd1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6712375082970622643, guid: 37c0bc67edcfb8b448e9132340a30cd1,
         type: 3}
@@ -2197,20 +2228,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6900952382689257672, guid: 37c0bc67edcfb8b448e9132340a30cd1,
-        type: 3}
-      propertyPath: firePoint
-      value: 
-      objectReference: {fileID: 1142871676}
     - target: {fileID: 8080491060720164246, guid: 37c0bc67edcfb8b448e9132340a30cd1,
         type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 1142871676}
-    m_RemovedComponents: []
+    - target: {fileID: 8080491060720164246, guid: 37c0bc67edcfb8b448e9132340a30cd1,
+        type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 523223901}
+    - target: {fileID: 8080491060720164246, guid: 37c0bc67edcfb8b448e9132340a30cd1,
+        type: 3}
+      propertyPath: cameramanNeverDies
+      value: 
+      objectReference: {fileID: 1142871676}
+    m_RemovedComponents:
+    - {fileID: 6900952382689257672, guid: 37c0bc67edcfb8b448e9132340a30cd1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6641463155243143313, guid: 37c0bc67edcfb8b448e9132340a30cd1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 523223904}
   m_SourcePrefab: {fileID: 100100000, guid: 37c0bc67edcfb8b448e9132340a30cd1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
