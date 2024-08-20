@@ -147,6 +147,7 @@ public class TurnManager : MonoBehaviour
         foreach (Enemy e in enemyList)
         {
             e.GetComponent<EnemyMove>().Move();
+            e.GetComponent<EnemyShoot>().Shoot();
         }
         
         nextState = GameState.Cycle;
