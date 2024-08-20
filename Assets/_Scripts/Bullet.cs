@@ -8,8 +8,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float lifeSpan = 5f;
 
 
-    private float bulletScaleAmount = 1f;
-    private FunctionApplier.Function bulletFunction;
+    [SerializeField] private float bulletScaleAmount = 1f;
+    private FunctionApplier.Function bulletFunc;
 
     private void Start()
     {
@@ -31,7 +31,26 @@ public class Bullet : MonoBehaviour
         {
             Vector3 scale = scalable.GetScale();
 
-            scalable.SetScale(FunctionApplier.ApplyFunctionOnVecComponents(bulletFunction, scale, bulletScaleAmount, true, true, true));
+            //int randomFunc = UnityEngine.Random.Range(0, 100);
+
+            //if (randomFunc <= 80)
+            //{
+            //    bulletFunc = FunctionApplier.Function.Add;
+            //    bulletScaleAmount = -1;
+
+            //}
+            //else if (randomFunc <= 95)
+            //{
+            //    bulletFunc = FunctionApplier.Function.Multiply;
+            //    bulletScaleAmount = UnityEngine.Random.Range(0.1f, 1f); ;
+            //}
+            //else
+            //{
+            //    bulletFunc = FunctionApplier.Function.Power;
+            //    bulletScaleAmount = 0;
+            //}
+
+            scalable.SetScale(FunctionApplier.ApplyFunctionOnVecComponents(FunctionApplier.Function.Add, scale, -1, true, true, true));
 
             SoundManager.Instance.Play("Hurt");
 

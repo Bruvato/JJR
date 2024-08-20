@@ -75,14 +75,14 @@ public class CardManager : MonoBehaviour
         {
             SpawnNewCard();
         }
-        
 
-        
+
+
     }
 
     private void Instance_OnTurnCountChanged(object sender, TurnManager.OnTurnCountChangedEventArgs e)
     {
-        
+
     }
 
     private void SpawnNewCard()
@@ -104,29 +104,45 @@ public class CardManager : MonoBehaviour
                     break;
             }
 
-            int randomFunc = UnityEngine.Random.Range(1, 4);
+            int randomFunc = UnityEngine.Random.Range(0, 100);
 
-            switch (randomFunc)
+            if (randomFunc <= 80)
             {
-                case 1:
-                    //add
-                    newCard.function = "+";
-                    break;
-                case 2:
-                    //multiply
-                    newCard.function = "×";
-                    break;
-                case 3:
-                    //power
-                    newCard.function = "<sup>";
-                    break;
+                newCard.function = "+";
+                newCard.adjustmentValue = UnityEngine.Random.Range(1, 11);
             }
+            else if (randomFunc <= 95)
+            {
+                newCard.function = "×";
+                newCard.adjustmentValue = UnityEngine.Random.Range(2, 4);
+            }
+            else
+            {
+                newCard.function = "<sup>";
+                newCard.adjustmentValue = UnityEngine.Random.Range(2, 3);
+            }
+
+            //switch (randomFunc)
+            //{
+            //    case 1:
+            //        //add
+            //        newCard.function = "+";
+            //        break;
+            //    case 2:
+            //        //multiply
+            //        newCard.function = "×";
+            //        break;
+            //    case 3:
+            //        //power
+            //        newCard.function = "<sup>";
+            //        break;
+            //}
 
             int randomAdjustmentVal = UnityEngine.Random.Range(1, 11);
 
 
 
-            newCard.adjustmentValue = randomAdjustmentVal;
+            //newCard.adjustmentValue = randomAdjustmentVal;
 
             _cards.Add(newCard);
             CameraSystem.LockCursor(false);
