@@ -18,7 +18,7 @@ public class PlayerScaleUI : MonoBehaviour
     {
         Player.Instance.OnScaleChanged += Instance_OnScaleChanged;
 
-        UpdateScaleText(Vector3.zero);
+        UpdateScaleText(Vector3.one);
     }
 
     private void Instance_OnScaleChanged(object sender, IScalable.OnScaleChangedEventArgs e)

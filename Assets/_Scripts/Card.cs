@@ -11,10 +11,10 @@ public class Card
     public float adjustmentValue;
 
 
-    public Card(string function, string axis, float adjustmentValue)
+    public Card(string axis, string function, float adjustmentValue)
     {
-        this.function = function;
         this.axis = axis;
+        this.function = function;
         this.adjustmentValue = adjustmentValue;
     }
 

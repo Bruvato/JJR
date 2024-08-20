@@ -14,7 +14,7 @@ public class CameraSystem : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        LockCursor(true);
 
         SetCamDist(minCamDist);
     }
@@ -62,6 +62,19 @@ public class CameraSystem : MonoBehaviour
 
         cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = camDist;
 
+    }
+
+    public static void LockCursor(bool isLocked)
+    {
+        if (isLocked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        
     }
 
 }
