@@ -35,6 +35,8 @@ public class Enemy : MonoBehaviour, IScalable
     private void OnDestroy()
     {
         EnemyManager.Instance.GetEnemies().Remove(this);
+        SoundManager.Instance.Play("Kill2");
+
     }
 
 
