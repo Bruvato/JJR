@@ -7,9 +7,9 @@ using UnityEngine.Rendering;
 public class GridManMaker : MonoBehaviour{ 
     [SerializeField] private float baseGridSpacing = 1f;
     [SerializeField] private Color gridColor = Color.white;
-    [SerializeField] private float lineWidth = 0.02f;
-    [SerializeField] private float gridExtensionFactor = 1.5f; 
-    [SerializeField] private float cullDistance = 20f;
+    [SerializeField] private float lineWidth = 0.005f;
+    [SerializeField] private float gridExtensionFactor = 1.1f; 
+    [SerializeField] private float cullDistance = 10f;
 
     private List<GameObject> gridLines = new List<GameObject>();
 
