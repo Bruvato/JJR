@@ -152,7 +152,7 @@ public class TurnManager : MonoBehaviour
         TurnCount++;
 
         EnemyManager.Instance.Spawn();
-
+        EnemyManager.Instance.EnemyAim();
         nextState = GameState.PlayerTurn;
     }
 

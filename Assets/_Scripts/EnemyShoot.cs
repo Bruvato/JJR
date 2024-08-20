@@ -10,9 +10,15 @@ public class EnemyShoot : MonoBehaviour
 
     [SerializeField] private Collider enemyCollider;
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    public void Aim(){
+        aimDir= Quaternion.LookRotation(Player.Instance.transform.position - transform.position).normalized;
 
-
-
+    }
     public void Shoot(){
         Vector3 toPlayer = Vector3.Normalize(Player.Instance.transform.position - transform.position);
         aimDir= Quaternion.LookRotation(Player.Instance.transform.position - transform.position).normalized;

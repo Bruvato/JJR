@@ -9,11 +9,13 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    private Dictionary<Vector3, float> trajectoryMatch = new Dictionary<Vector3, float>();
+    [SerializeField] private float orbitRange, orbitWidth;
 
+    private Dictionary<Vector3, float> trajectoryMatch = new Dictionary<Vector3, float>();
+    
     // invoke when any enemy moves
     public static event EventHandler OnAnyEnemyPositionChanged;
-
+    
 
     private void Update()
     {
@@ -41,10 +43,14 @@ public class EnemyMove : MonoBehaviour
     }
 
     public void Move(){
+        
         float distance = Vector3.Magnitude(Player.Instance.transform.position - transform.position);
-        if (distance>10){
+        Vector3 playerScale = Player.Instance.GetScale();
+        int playerRange = (int)(Mathf.Max(Mathf.Max(playerScale.x, playerScale.y), playerScale.z) / 2);
+
+        if (distance>playerRange + orbitRange + orbitWidth){
             MoveClose();
-        }else if(8<distance && distance<10){
+        }else if(playerRange + orbitRange<distance && distance<playerRange + orbitRange + orbitWidth){
             MoveParallel();
         }else{
             MoveAway();
