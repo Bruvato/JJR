@@ -28,6 +28,12 @@ public class EnemyManager : MonoBehaviour
     public List<Enemy> GetEnemies(){
         return enemies;
     }
+    public void EnemyPreMove(){
+        foreach (Enemy e in enemies)
+        {
+            e.GetComponent<EnemyMove>().PreMove();
+        }
+    }
     public void EnemyMove(){
         foreach (Enemy e in enemies)
         {
