@@ -63,6 +63,7 @@ public class CardManager : MonoBehaviour
 
     private void Instance_OnTurnCountChanged(object sender, TurnManager.OnTurnCountChangedEventArgs e)
     {
+        Debug.Log(e.turnCount);
         if (e.turnCount % 5 == 0)
         {
             SpawnNewCard();

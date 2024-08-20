@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public enum GameState
 {
@@ -75,6 +76,11 @@ public class TurnManager : MonoBehaviour
 
 
         UpdateGameState(GameState.PlayerTurn);
+
+        OnTurnCountChanged?.Invoke(this, new OnTurnCountChangedEventArgs
+        {
+            turnCount = _turnCount
+        });
     }
 
 
