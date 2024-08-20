@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
@@ -25,9 +27,9 @@ public class EnemyMove : MonoBehaviour
 
         OnAnyEnemyPositionChanged.Invoke(this, EventArgs.Empty);
     }
-    private Vector3 findTrajectory(){
+    private Vector3 FindTrajectory(){
         Vector3 toPlayer = Vector3.Normalize(Player.Instance.transform.position - transform.position);
-
+        trajectoryMatch.Clear();
         trajectoryMatch.Add(Vector3.down, Vector3.Dot(toPlayer, Vector3.down));
         trajectoryMatch.Add(Vector3.up, Vector3.Dot(toPlayer, Vector3.up));
         trajectoryMatch.Add(Vector3.left, Vector3.Dot(toPlayer, Vector3.left));
@@ -38,15 +40,28 @@ public class EnemyMove : MonoBehaviour
         return trajectoryMatch.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
     }
 
-    private void moveClose(){
+    public void Move(){
+        float distance = Vector3.Magnitude(Player.Instance.transform.position - transform.position);
+        if (distance>10){
+            MoveClose();
+        }else if(8<distance && distance<10){
+            MoveParallel();
+        }else{
+            MoveAway();
+        }
+    }
+    
+    private void MoveClose(){
+        transform.Translate(FindTrajectory());
 
     }
 
-    private void moveAway(){
-
+    private void MoveAway(){
+        transform.Translate(Vector3.Scale(FindTrajectory(), new Vector3(-1,-1,-1)));
     }
 
-    private void moveParallel(){
+    private void MoveParallel(){
+        transform.Translate(new Vector3(FindTrajectory().y, FindTrajectory().z, FindTrajectory().x));
 
     }
 
