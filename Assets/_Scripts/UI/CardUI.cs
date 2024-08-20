@@ -15,7 +15,7 @@ public class CardUI : MonoBehaviour
     {
         cardButton.onClick.AddListener(() =>
         {
-            //SoundManager.Instance.Play("Card");
+            SoundManager.Instance.Play("Card");
 
             CardManager.Instance.ApplyCard(card);
             CardManager.Instance.ClearCards();

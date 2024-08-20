@@ -8,7 +8,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float lifeSpan = 5f;
 
 
-    [SerializeField] private float bulletScaleAmount = 1f;
+    private float bulletScaleAmount = 1f;
+    private FunctionApplier.Function bulletFunction;
 
     private void Start()
     {
@@ -30,7 +31,7 @@ public class Bullet : MonoBehaviour
         {
             Vector3 scale = scalable.GetScale();
 
-            scalable.SetScale(FunctionApplier.ApplyFunctionOnVecComponents(FunctionApplier.Function.Add, scale, -bulletScaleAmount, true, true, true));
+            scalable.SetScale(FunctionApplier.ApplyFunctionOnVecComponents(bulletFunction, scale, bulletScaleAmount, true, true, true));
 
             SoundManager.Instance.Play("Hurt");
 
