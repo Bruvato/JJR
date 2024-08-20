@@ -23,6 +23,10 @@ public class Player : MonoBehaviour, IScalable
             scale = scale,
         });
     }
+    public float GetMaxScaleComponent()
+    {
+        return Mathf.Max(_playerScale.x, _playerScale.y, _playerScale.z);
+    }
 
 
     private void Awake()
