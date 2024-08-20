@@ -28,7 +28,18 @@ public class EnemyManager : MonoBehaviour
     public List<Enemy> getEnemies(){
         return enemies;
     }
-
+    public void EnemyMove(){
+        foreach (Enemy e in enemies)
+        {
+            e.GetComponent<EnemyMove>().Move();
+        }
+    }
+    public void EnemyShoot(){
+        foreach (Enemy e in enemies)
+        {
+            e.GetComponent<EnemyShoot>().Shoot();
+        }
+    }
     void Update()
     {
 

@@ -21,7 +21,8 @@ public class EnemyShoot : MonoBehaviour
 
     public void Shoot(){
         Vector3 toPlayer = Vector3.Normalize(Player.Instance.transform.position - transform.position);
-        Instantiate(bulletPrefab, transform.position, Quaternion.identity).transform.rotation =Quaternion.LookRotation(Player.Instance.transform.position - transform.position);
+        aimDir= Quaternion.LookRotation(Player.Instance.transform.position - transform.position).normalized;
+        Instantiate(bulletPrefab, transform.position, aimDir).transform.rotation = Quaternion.LookRotation((Player.Instance.transform.position - transform.position).normalized);
         // Instantiate(bulletPrefab, transform.position, Quaternion.identity).transform.rotation.SetLookRotation(toPlayer);
 
     }
