@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private int spawnRadiusModifier;
+    [SerializeField] private int spawnRadiusModifier, maxEnemies;
     private List<Enemy> enemies = new List<Enemy>();
     public List<Enemy> getEnemies(){
         return enemies;
@@ -40,6 +40,12 @@ public class EnemyManager : MonoBehaviour
             e.GetComponent<EnemyShoot>().Shoot();
         }
     }
+    public void EnemyAim(){
+        foreach (Enemy e in enemies)
+        {
+            e.GetComponent<EnemyShoot>().Aim();
+        }
+    }
     void Update()
     {
 
@@ -47,12 +53,14 @@ public class EnemyManager : MonoBehaviour
 
     public void Spawn()
     {
+        if(enemies.Count<maxEnemies){
         Vector3 enemyScale = new Vector3(UnityEngine.Random.Range(1, 10), UnityEngine.Random.Range(1, 10), UnityEngine.Random.Range(1, 10));
         
         Enemy newEnemy = Instantiate(enemyPrefab, SearchSpawnVector(), Quaternion.identity).GetComponent<Enemy>();
 
         newEnemy.SetScale(enemyScale);
         enemies.Add(newEnemy);
+        }
     }
     private Vector3 SearchSpawnVector()
     {

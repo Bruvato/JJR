@@ -1719,6 +1719,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 585398310772779455, guid: b8f710b8915f28148b3914621bccd92b,
     type: 3}
   spawnRadiusModifier: 20
+  maxEnemies: 8
 --- !u!4 &1227463642
 Transform:
   m_ObjectHideFlags: 0

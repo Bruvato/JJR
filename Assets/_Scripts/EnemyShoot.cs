@@ -8,6 +8,10 @@ public class EnemyShoot : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     private Quaternion aimDir;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        Aim();
+    }
     void Start()
     {
         
@@ -18,11 +22,12 @@ public class EnemyShoot : MonoBehaviour
     {
         
     }
-
-    public void Shoot(){
-        Vector3 toPlayer = Vector3.Normalize(Player.Instance.transform.position - transform.position);
+    public void Aim(){
         aimDir= Quaternion.LookRotation(Player.Instance.transform.position - transform.position).normalized;
-        Instantiate(bulletPrefab, transform.position, aimDir).transform.rotation = Quaternion.LookRotation((Player.Instance.transform.position - transform.position).normalized);
+
+    }
+    public void Shoot(){
+        Instantiate(bulletPrefab, transform.position, aimDir).transform.rotation = aimDir;
         // Instantiate(bulletPrefab, transform.position, Quaternion.identity).transform.rotation.SetLookRotation(toPlayer);
 
     }
