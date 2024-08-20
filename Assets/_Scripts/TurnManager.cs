@@ -76,6 +76,8 @@ public class TurnManager : MonoBehaviour
 
 
         UpdateGameState(GameState.PlayerTurn);
+        SoundManager.Instance.Play("BGM");
+
     }
 
 

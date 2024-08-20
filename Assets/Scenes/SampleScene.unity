@@ -1780,10 +1780,16 @@ MonoBehaviour:
     looping: 0
     source: {fileID: 0}
   - name: BGM
-    clip: {fileID: 8300000, guid: cdb34a03642e8fe449f4a5233686739a, type: 3}
-    volume: 0.353
-    pitch: 0.94
+    clip: {fileID: 8300000, guid: 2e1d4c949f9dc0b4088af106d4c81183, type: 3}
+    volume: 0.208
+    pitch: 0.69
     looping: 1
+    source: {fileID: 0}
+  - name: Card
+    clip: {fileID: 8300000, guid: 2a040740bda079142b21c4d8dc82d905, type: 3}
+    volume: 0.403
+    pitch: 0.94
+    looping: 0
     source: {fileID: 0}
 --- !u!4 &1154313000
 Transform:

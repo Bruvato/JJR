@@ -19,6 +19,8 @@ public class EnemyShoot : MonoBehaviour
     void Awake()
     {
         TurnManager.Instance.OnTurnCountChanged += Instance_OnTurnCountChanged;
+        lineRenderer.positionCount= 0;
+
     }
     private void OnDestroy()
     {
