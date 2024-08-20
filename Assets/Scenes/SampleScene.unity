@@ -1600,7 +1600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cinemachineVirtualCamera: {fileID: 1142871675}
   minCamDist: 3
-  maxCamDist: 10
+  maxCamDist: 5
   minMultipler: 3
   maxMultipler: 5
 --- !u!1 &1211554814

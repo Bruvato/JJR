@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject);
+        //Debug.Log(collision.gameObject);
 
         if  (collision.gameObject.transform.parent.TryGetComponent(out IScalable scalable))
         {

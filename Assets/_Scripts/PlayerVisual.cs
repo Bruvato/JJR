@@ -18,7 +18,7 @@ public class PlayerVisual : MonoBehaviour
     {
         Player.Instance.OnScaleChanged += Instance_OnScaleChanged;
 
-        SetVisualScale(Vector3.one);
+        //SetVisualScale(Vector3.one);
     }
 
     private void Instance_OnScaleChanged(object sender, IScalable.OnScaleChangedEventArgs e)
@@ -28,7 +28,18 @@ public class PlayerVisual : MonoBehaviour
 
     private void SetVisualScale(Vector3 scale)
     {
+        if (playerVisualTransform == null)
+        {
+            return;
+        }
+
         playerVisualTransform.DOScale(scale, scaleDuration).SetEase(Ease.InOutBounce).SetAutoKill();
+        playerVisualTransform.transform.DOKill();
+    }
+
+    private void OnDestroy()
+    {
+        Player.Instance.OnScaleChanged -= Instance_OnScaleChanged;
     }
 
 }
