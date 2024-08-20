@@ -9,6 +9,8 @@ public class CameraSystem : MonoBehaviour
 
     [SerializeField] private float minCamDist = 3f;
     [SerializeField] private float maxCamDist = 5f;
+    [SerializeField] private float minMultipler = 3f;
+    [SerializeField] private float maxMultipler = 5f;
 
 
 
@@ -20,15 +22,15 @@ public class CameraSystem : MonoBehaviour
     }
     private void Start()
     {
-        Player.Instance.OnScaleChanged += Instance_OnScaleChanged; ;
+        Player.Instance.OnScaleChanged += Instance_OnScaleChanged;
     }
 
     private void Instance_OnScaleChanged(object sender, IScalable.OnScaleChangedEventArgs e)
     {
         Vector3 playerScale = e.scale;
         float maxScaleComponent = Mathf.Max(Mathf.Max(playerScale.x, playerScale.y), playerScale.z);
-        minCamDist = 3 * maxScaleComponent;
-        maxCamDist = 5 * maxScaleComponent;
+        minCamDist = minMultipler * maxScaleComponent;
+        maxCamDist = maxMultipler * maxScaleComponent;
 
         HandleCameraZoom();
 

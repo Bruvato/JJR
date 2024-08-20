@@ -20,7 +20,7 @@ public class EnemyVisual : MonoBehaviour
 
     private void Enemy_OnScaleChanged(object sender, IScalable.OnScaleChangedEventArgs e)
     {
-        enemyVisualTransform.DOScale(e.scale, scaleDuration).SetEase(Ease.InOutBounce);
+        enemyVisualTransform.DOScale(e.scale, scaleDuration).SetEase(Ease.InOutBounce).SetAutoKill(true);
     }
     
 }

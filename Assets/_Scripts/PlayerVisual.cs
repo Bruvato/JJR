@@ -28,7 +28,7 @@ public class PlayerVisual : MonoBehaviour
 
     private void SetVisualScale(Vector3 scale)
     {
-        playerVisualTransform.DOScale(scale, scaleDuration).SetEase(Ease.InOutBounce);
+        playerVisualTransform.DOScale(scale, scaleDuration).SetEase(Ease.InOutBounce).SetAutoKill();
     }
 
 }
