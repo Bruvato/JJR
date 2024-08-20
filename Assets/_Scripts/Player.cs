@@ -36,9 +36,6 @@ public class Player : MonoBehaviour, IScalable
             Instance = this;
         }
     }
-    
-
-    
 
     private void Start()
     {

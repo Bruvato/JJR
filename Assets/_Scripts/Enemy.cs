@@ -25,12 +25,19 @@ public class Enemy : MonoBehaviour, IScalable
             scale = scale,
         });
 
+        if (scale.x * scale.y * scale.z <= 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
-
-    private void Awake()
+    private void OnDestroy()
     {
-
+        EnemyManager.Instance.GetEnemies().Remove(this);
     }
+
+
+
 
 }

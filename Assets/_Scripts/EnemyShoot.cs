@@ -7,28 +7,29 @@ public class EnemyShoot : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     private Quaternion aimDir;
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        Aim();
-    }
-    void Start()
-    {
-        
-    }
+
+    [SerializeField] private Collider enemyCollider;
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    public void Aim(){
-        aimDir= Quaternion.LookRotation(Player.Instance.transform.position - transform.position).normalized;
 
     }
-    public void Shoot(){
-        Instantiate(bulletPrefab, transform.position, aimDir).transform.rotation = aimDir;
+    public void Aim()
+    {
+        aimDir = Quaternion.LookRotation(Player.Instance.transform.position - transform.position).normalized;
+
+    }
+    public void Shoot()
+    {
+        Vector3 toPlayer = Vector3.Normalize(Player.Instance.transform.position - transform.position);
+        aimDir = Quaternion.LookRotation(Player.Instance.transform.position - transform.position).normalized;
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, aimDir);
         // Instantiate(bulletPrefab, transform.position, Quaternion.identity).transform.rotation.SetLookRotation(toPlayer);
+
+        bullet.transform.rotation = Quaternion.LookRotation((Player.Instance.transform.position - transform.position).normalized);
+
+        Physics.IgnoreCollision(bullet.GetComponent<Collider>(), enemyCollider);
 
     }
 }

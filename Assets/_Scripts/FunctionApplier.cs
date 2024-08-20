@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class FunctionApplier
 {
+    public const float MAX_SCALE = 999f;
 
     public enum Function
     {
@@ -18,13 +19,13 @@ public static class FunctionApplier
         switch(function)
         {
             case Function.Add:
-                return input + adjustmentValue;
+                return Mathf.Clamp(input + adjustmentValue, input + adjustmentValue, MAX_SCALE);
 
             case Function.Multiply:
-                return input * adjustmentValue;
+                return Mathf.Clamp(input * adjustmentValue, input * adjustmentValue, MAX_SCALE);
 
             case Function.Power:
-                return Mathf.Pow(input, adjustmentValue);
+                return Mathf.Clamp(Mathf.Pow(input, adjustmentValue), Mathf.Pow(input, adjustmentValue), MAX_SCALE);
         }
 
         return input;
