@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6434719678906828855}
   - component: {fileID: 687488082618591450}
   - component: {fileID: 8863172305712237479}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 447934533995897370}
   - component: {fileID: 8080491060720164246}
   - component: {fileID: 7182017387688657228}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,3 +197,4 @@ MonoBehaviour:
     type: 3}
   firePoint: {fileID: 0}
   playerCollider: {fileID: 0}
+  maxAimRange: 50
