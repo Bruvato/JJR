@@ -17,11 +17,18 @@ public class PlayerVisual : MonoBehaviour
     private void Start()
     {
         Player.Instance.OnScaleChanged += Instance_OnScaleChanged;
+
+        SetVisualScale(Vector3.one);
     }
 
     private void Instance_OnScaleChanged(object sender, IScalable.OnScaleChangedEventArgs e)
     {
-        playerVisualTransform.DOScale(e.scale, scaleDuration).SetEase(Ease.InOutBounce);
+        SetVisualScale(e.scale);
+    }
+
+    private void SetVisualScale(Vector3 scale)
+    {
+        playerVisualTransform.DOScale(scale, scaleDuration).SetEase(Ease.InOutBounce);
     }
 
 }

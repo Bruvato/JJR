@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class CardUI : MonoBehaviour
 {
+    private Card card;
     [SerializeField] private Button cardButton;
     [SerializeField] private TextMeshProUGUI cardText;
 
@@ -14,12 +15,18 @@ public class CardUI : MonoBehaviour
     {
         cardButton.onClick.AddListener(() =>
         {
-            CardManager.Instance.GetCards().Clear();
+            CardManager.Instance.ApplyCard(card);
+            CardManager.Instance.ClearCards();
+            CameraSystem.LockCursor(true);
         });
     }
 
-    public void SetCardText(string text)
+    public void SetCardText(Card card)
     {
+        this.card = card;
+
+        string text = card.axis + card.function + card.adjustmentValue;
         cardText.text = text;
+
     }
 }

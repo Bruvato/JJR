@@ -23,9 +23,8 @@ public class CardManagerUI : MonoBehaviour
 
         foreach (Card card in CardManager.Instance.GetCards())
         {
-            string text = card.axis + card.function + card.adjustmentValue;
-            Instantiate(cardUI, container).GetComponent<CardUI>().SetCardText(text);
-
+            
+            Instantiate(cardUI, container).GetComponent<CardUI>().SetCardText(card);
             
         }
     }

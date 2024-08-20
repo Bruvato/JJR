@@ -23,8 +23,37 @@ public class CardManager : MonoBehaviour
     {
         return _cards;
     }
+    public void ClearCards()
+    {
+        _cards.Clear();
+        OnCardsChanged?.Invoke(this, EventArgs.Empty);
+    }
+    public void ApplyCard(Card card)
+    {
+
+        Vector3 playerScale = Player.Instance.GetScale();
+
+        FunctionApplier.Function func = FunctionApplier.Function.Add;
+        switch (card.function)
+        {
+            case "+":
+                func = FunctionApplier.Function.Add;
+                break;
+            case "×":
+                func = FunctionApplier.Function.Multiply;
+                break;
+            case "<sup>":
+                func = FunctionApplier.Function.Power;
+                break;
+        }
+
+        Vector3 newScale = FunctionApplier.ApplyFunctionOnVecComponents(func, playerScale, card.adjustmentValue, card.axis == "x", card.axis == "y", card.axis == "z");
+        Player.Instance.SetScale(newScale);
+    }
 
     public event EventHandler OnCardsChanged;
+
+    private int cardAmount = 3;
 
 
     private void Start()
@@ -42,9 +71,54 @@ public class CardManager : MonoBehaviour
 
     private void SpawnNewCard()
     {
-        Card newCard = new Card("+", "x", 5);
-        _cards.Add(newCard);
+        for (int i = 1; i <= cardAmount; i++)
+        {
+            Card newCard = new Card(null, null, 0);
 
-        OnCardsChanged?.Invoke(this, EventArgs.Empty);
+            int randomAxis = UnityEngine.Random.Range(1, 4);
+
+            switch (randomAxis)
+            {
+                case 1:
+                    newCard.axis = "x";
+                    break;
+                case 2:
+                    newCard.axis = "y";
+                    break;
+                case 3:
+                    newCard.axis = "z";
+                    break;
+            }
+
+            int randomFunc = UnityEngine.Random.Range(1, 4);
+
+            switch (randomFunc)
+            {
+                case 1:
+                    //add
+                    newCard.function = "+";
+                    break;
+                case 2:
+                    //multiply
+                    newCard.function = "×";
+                    break;
+                case 3:
+                    //power
+                    newCard.function = "<sup>";
+                    break;
+            }
+
+            int randomAdjustmentVal = UnityEngine.Random.Range(1, 11);
+
+
+
+            newCard.adjustmentValue = randomAdjustmentVal;
+
+            _cards.Add(newCard);
+            CameraSystem.LockCursor(false);
+
+            OnCardsChanged?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 }
