@@ -78,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4284621713258234524, guid: d074afe4dd0c0c940bb3da7b3c30a9c8,
     type: 3}
+  cooldown: 2
   enemyCollider: {fileID: 5580548199166617862}
 --- !u!120 &101925211226853006
 LineRenderer:
