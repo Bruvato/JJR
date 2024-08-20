@@ -76,11 +76,6 @@ public class TurnManager : MonoBehaviour
 
 
         UpdateGameState(GameState.PlayerTurn);
-
-        OnTurnCountChanged?.Invoke(this, new OnTurnCountChangedEventArgs
-        {
-            turnCount = _turnCount
-        });
     }
 
 

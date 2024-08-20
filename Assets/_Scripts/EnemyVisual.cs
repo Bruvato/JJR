@@ -20,15 +20,13 @@ public class EnemyVisual : MonoBehaviour
 
     private void Enemy_OnScaleChanged(object sender, IScalable.OnScaleChangedEventArgs e)
     {
-        if (enemyVisualTransform == null)
-        {
-            return;
-        }
-
-        Debug.Log("do scale");
 
         enemyVisualTransform.DOScale(e.scale, scaleDuration).SetEase(Ease.InOutBounce).SetAutoKill(true);
-        enemyVisualTransform.transform.DOKill();
+
+        if (e.scale.x * e.scale.y * e.scale.z <= 0)
+        {
+            enemyVisualTransform.transform.DOKill();
+        }
 
     }
 
