@@ -22,6 +22,8 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {
+        // SoundManager.Instance.Play("PShoot");
+        
         if (Input.GetButtonDown("Fire1"))
         {
             lockedIn = true;
