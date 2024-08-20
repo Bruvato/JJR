@@ -27,7 +27,7 @@ public class EnemyShoot : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, transform.position, aimDir);
         // Instantiate(bulletPrefab, transform.position, Quaternion.identity).transform.rotation.SetLookRotation(toPlayer);
 
-        bullet.transform.rotation = Quaternion.LookRotation((Player.Instance.transform.position - transform.position).normalized);
+        bullet.transform.rotation = aimDir;
 
         Physics.IgnoreCollision(bullet.GetComponent<Collider>(), enemyCollider);
 
