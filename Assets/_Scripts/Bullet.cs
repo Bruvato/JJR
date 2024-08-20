@@ -26,14 +26,13 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log(collision.gameObject);
-
         if  (collision.gameObject.transform.parent.TryGetComponent(out IScalable scalable))
         {
             Vector3 scale = scalable.GetScale();
 
             scalable.SetScale(FunctionApplier.ApplyFunctionOnVecComponents(FunctionApplier.Function.Add, scale, -bulletScaleAmount, true, true, true));
-            SoundManager.Instance.Play("Hurt");
+
+            //SoundManager.Instance.Play("Hurt");
 
             Destroy(gameObject);
         }
