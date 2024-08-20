@@ -11,7 +11,7 @@ public class CardManagerUI : MonoBehaviour
     
     private void Start()
     {
-        CardManager.Instance
+        //CardManager.Instance
     }
 
     
