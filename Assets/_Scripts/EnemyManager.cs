@@ -25,7 +25,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private int spawnRadiusModifier, maxEnemies;
     private List<Enemy> enemies = new List<Enemy>();
-    public List<Enemy> getEnemies(){
+    public List<Enemy> GetEnemies(){
         return enemies;
     }
     public void EnemyMove(){

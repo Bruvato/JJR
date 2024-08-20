@@ -13,15 +13,17 @@ public class EnemyShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    public void Aim(){
-        aimDir= Quaternion.LookRotation(Player.Instance.transform.position - transform.position).normalized;
 
     }
-    public void Shoot(){
+    public void Aim()
+    {
+        aimDir = Quaternion.LookRotation(Player.Instance.transform.position - transform.position).normalized;
+
+    }
+    public void Shoot()
+    {
         Vector3 toPlayer = Vector3.Normalize(Player.Instance.transform.position - transform.position);
-        aimDir= Quaternion.LookRotation(Player.Instance.transform.position - transform.position).normalized;
+        aimDir = Quaternion.LookRotation(Player.Instance.transform.position - transform.position).normalized;
         GameObject bullet = Instantiate(bulletPrefab, transform.position, aimDir);
         // Instantiate(bulletPrefab, transform.position, Quaternion.identity).transform.rotation.SetLookRotation(toPlayer);
 
