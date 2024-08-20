@@ -28,13 +28,12 @@ public class PlayerVisual : MonoBehaviour
 
     private void SetVisualScale(Vector3 scale)
     {
-        if (playerVisualTransform == null)
-        {
-            return;
-        }
-
         playerVisualTransform.DOScale(scale, scaleDuration).SetEase(Ease.InOutBounce).SetAutoKill();
-        playerVisualTransform.transform.DOKill();
+
+        if (scale.x * scale.y * scale.z <= 0)
+        {
+            playerVisualTransform.transform.DOKill();
+        }
     }
 
     private void OnDestroy()
