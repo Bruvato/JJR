@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,14 @@ public class CardManager : MonoBehaviour
         }
     }
 
+    private List<Card> _cards = new List<Card>();
+    public List<Card> GetCards()
+    {
+        return _cards;
+    }
+
+    public event EventHandler OnCardsChanged;
+
 
     private void Start()
     {
@@ -33,6 +42,9 @@ public class CardManager : MonoBehaviour
 
     private void SpawnNewCard()
     {
+        Card newCard = new Card("+", "x", 5);
+        _cards.Add(newCard);
 
+        OnCardsChanged?.Invoke(this, EventArgs.Empty);
     }
 }
