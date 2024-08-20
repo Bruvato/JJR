@@ -20,6 +20,11 @@ public class EnemyShoot : MonoBehaviour
     {
         TurnManager.Instance.OnTurnCountChanged += Instance_OnTurnCountChanged;
     }
+    private void OnDestroy()
+    {
+        TurnManager.Instance.OnTurnCountChanged -= Instance_OnTurnCountChanged;
+        
+    }
     private void Instance_OnTurnCountChanged(object sender, TurnManager.OnTurnCountChangedEventArgs e)
     {
         count++;
