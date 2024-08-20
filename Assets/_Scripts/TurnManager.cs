@@ -143,13 +143,8 @@ public class TurnManager : MonoBehaviour
     }
     private void HandleEnemyActions()
     {
-        List<Enemy> enemyList = EnemyManager.Instance.getEnemies();
-        foreach (Enemy e in enemyList)
-        {
-            e.GetComponent<EnemyMove>().Move();
-            e.GetComponent<EnemyShoot>().Shoot();
-        }
-        
+        EnemyManager.Instance.EnemyMove();
+        EnemyManager.Instance.EnemyShoot();
         nextState = GameState.Cycle;
     }
     private void HandleCycle()
