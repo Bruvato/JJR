@@ -14,6 +14,8 @@ public class PlayerShoot : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            SoundManager.Instance.Play("PShoot");
+
             Shoot();
         }
     }

@@ -59,6 +59,7 @@ public class EnemyShoot : MonoBehaviour
         bullet.transform.rotation = aimDir;
 
         Physics.IgnoreCollision(bullet.GetComponent<Collider>(), enemyCollider);
+        SoundManager.Instance.Play("EShoot");
         }
 
     }

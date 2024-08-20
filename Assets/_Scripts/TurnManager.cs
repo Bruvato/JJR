@@ -157,6 +157,7 @@ public class TurnManager : MonoBehaviour
         EnemyManager.Instance.Spawn();
         EnemyManager.Instance.EnemyAim();
         EnemyManager.Instance.EnemyPreMove();
+        SoundManager.Instance.Play("Turn");
         nextState = GameState.PlayerTurn;
     }
 
